@@ -14,7 +14,7 @@
     </parent>
     <groupId>guru.springframework</groupId>
     <artifactId>Pet-Clinic-Project</artifactId>
-    <version>y</version>
+    <version>1.1-SNAPSHOT</version>
     <name>Pet-Clinic-Project</name>
     <description>Pet-Clinic-Project</description>
     <properties>
