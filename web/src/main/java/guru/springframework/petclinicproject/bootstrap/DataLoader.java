@@ -11,12 +11,14 @@ import guru.springframework.petclinicproject.services.PetTypeService;
 import guru.springframework.petclinicproject.services.SpecialityService;
 import guru.springframework.petclinicproject.services.VetService;
 import guru.springframework.petclinicproject.services.VisitService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 
 @Component
+@Slf4j
 public class DataLoader implements CommandLineRunner {
   private final OwnerService ownerService;
   private final VetService vetService;
@@ -34,6 +36,7 @@ public class DataLoader implements CommandLineRunner {
   
   @Override
   public void run(String... args) throws Exception {
+    log.info("Beginning data loading");
     int count = petTypeService.findAll().size();
     if (count == 0) {
       loadData();
@@ -41,6 +44,7 @@ public class DataLoader implements CommandLineRunner {
   }
   
   private void loadData() {
+    log.debug("Loading data");
     PetType dog = new PetType();
     dog.setName("Dog");
     PetType savedDogPetType = petTypeService.save(dog);
@@ -89,7 +93,7 @@ public class DataLoader implements CommandLineRunner {
     fionasCat.setName("Joel");
     owner2.getPets().add(fionasCat);
     
-    System.out.println("Loaded Owners...");
+    log.info("Loaded Owners...");
   
     Visit catVisit = new Visit();
     catVisit.setDescription("Sneezy cat");
@@ -99,14 +103,14 @@ public class DataLoader implements CommandLineRunner {
     Vet vet1 = new Vet();
     vet1.setFirstName("Sam");
     vet1.setLastName("Axe");
-    vet1.getSpecialties().add(savedRadiology);
+    vet1.getSpecialities().add(savedRadiology);
     vetService.save(vet1);
     
     Vet vet2 = new Vet();
     vet2.setFirstName("Jessie");
     vet2.setLastName("Porter");
-    vet2.getSpecialties().add(savedSurgery);
+    vet2.getSpecialities().add(savedSurgery);
     vetService.save(vet2);
-    System.out.println("Loaded Vets...");
+    log.info("Loaded Vets...");
   }
 }
